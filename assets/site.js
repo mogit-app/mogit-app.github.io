@@ -4,11 +4,11 @@
   const MEASUREMENT_ID = 'G-12DCQR1HCZ';
   const APP_STORE_URL = 'https://apps.apple.com/jp/app/mogit/id6797540728';
   const STORAGE_KEY = 'mogit_analytics_consent_v1';
+  const consent = () => { try { return localStorage.getItem(STORAGE_KEY); } catch (_) { return null; } };
   // Apply the stored choice before any analytics code can execute.
   window['ga-disable-' + MEASUREMENT_ID] = consent() !== 'accepted';
   let enabled = false;
   let loading = false;
-  const consent = () => { try { return localStorage.getItem(STORAGE_KEY); } catch (_) { return null; } };
   const saveConsent = value => { try { localStorage.setItem(STORAGE_KEY, value); } catch (_) { /* browser storage unavailable */ } };
   function startAnalytics() {
     if (enabled || loading) return;
